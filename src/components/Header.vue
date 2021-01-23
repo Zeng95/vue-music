@@ -1,9 +1,7 @@
 <template>
-  <header class="relative">
-    <div class="content flex justify-center">
-      <div class="icon"></div>
-      <h1 class="title">炸鸡音乐</h1>
-    </div>
+  <header class="relative flex justify-center items-center">
+    <div class="icon bg-center bg-no-repeat"></div>
+    <h1 class="title">炸鸡音乐</h1>
   </header>
 </template>
 
@@ -15,14 +13,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '@a/styles/scss/variables';
+@import '@a/styles/scss/mixin';
 
 header {
   height: 44px;
   color: #ffcd32;
   font-size: 0;
+  .icon {
+    width: 30px;
+    height: 32px;
+    margin-right: 9px;
+    background-size: 100%;
+    @include bg-image('../assets/images/logo');
+  }
 
   .title {
-    font-size: $font-size-large;
+    font-size: $font-size-lg;
   }
 }
 </style>

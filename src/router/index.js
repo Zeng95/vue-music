@@ -1,14 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Singer from '@v/Singer.vue'
+import Search from '@v/Search.vue'
+import Ranking from '@v/Ranking.vue'
+import Recommendation from '@v/Recommendation.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: { name: 'recommendation' }
+  },
+  {
+    path: '/singer',
+    name: 'singer',
+    component: Singer
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Search
+  },
+  {
+    path: '/ranking',
+    name: 'ranking',
+    component: Ranking
+  },
+  {
+    path: '/recommendation',
+    name: 'recommendation',
+    component: Recommendation
   }
 ]
 

@@ -1,23 +1,20 @@
 <template>
   <div id="app">
     <Header />
+    <Tabs />
     <router-view />
   </div>
 </template>
 
 <script>
 import Header from '@c/Header'
+import Tabs from '@c/Tabs'
 
 export default {
   name: 'App',
-  components: { Header }
+  components: {
+    Header,
+    Tabs
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@a/styles/scss/variables';
-
-#app {
-  color: $color-theme;
-}
-</style>

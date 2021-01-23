@@ -3,6 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+
 import '@a/styles/scss/index.scss'
 import '@a/styles/css/index.css'
 
