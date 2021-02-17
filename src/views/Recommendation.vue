@@ -4,8 +4,11 @@
 
 <script>
 export default {
-  name: 'Recommendation'
+  name: 'Recommendation',
+  data() {
+    return {}
+  }
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

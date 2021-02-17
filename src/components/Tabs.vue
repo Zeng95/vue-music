@@ -29,7 +29,7 @@ export default {
           name: '歌手'
         },
         {
-          location: '/ranking',
+          location: '/toplist',
           name: '排行榜'
         },
         {

@@ -1,6 +1,7 @@
 {
   "name": "vue-music",
   "version": "0.1.0",
+  "description": "使用 Vue.js 搭建的音乐播放器",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,6 +12,7 @@
     "@tailwindcss/postcss7-compat": "^2.0.1",
     "autoprefixer": "^9",
     "core-js": "^3.6.5",
+    "jsonp": "^0.2.1",
     "postcss": "^7",
     "register-service-worker": "^1.7.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",

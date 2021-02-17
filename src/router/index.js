@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Singer from '@v/Singer.vue'
 import Search from '@v/Search.vue'
-import Ranking from '@v/Ranking.vue'
+import Toplist from '@v/Toplist.vue'
 import Recommendation from '@v/Recommendation.vue'
 
 Vue.use(VueRouter)
@@ -23,9 +23,9 @@ const routes = [
     component: Search
   },
   {
-    path: '/ranking',
-    name: 'ranking',
-    component: Ranking
+    path: '/toplist',
+    name: 'toplist',
+    component: Toplist
   },
   {
     path: '/recommendation',

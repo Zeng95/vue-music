@@ -4,6 +4,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
+        '@api': path.resolve(__dirname, 'src/api'),
         '@a': path.resolve(__dirname, 'src/assets'),
         '@c': path.resolve(__dirname, 'src/components'),
         '@v': path.resolve(__dirname, 'src/views')
