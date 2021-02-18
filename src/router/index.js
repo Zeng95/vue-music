@@ -10,7 +10,13 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'home',
     redirect: { name: 'recommendation' }
+  },
+  {
+    path: '/recommendation',
+    name: 'recommendation',
+    component: Recommendation
   },
   {
     path: '/singer',
@@ -18,19 +24,14 @@ const routes = [
     component: Singer
   },
   {
-    path: '/search',
-    name: 'search',
-    component: Search
-  },
-  {
     path: '/toplist',
     name: 'toplist',
     component: Toplist
   },
   {
-    path: '/recommendation',
-    name: 'recommendation',
-    component: Recommendation
+    path: '/search',
+    name: 'search',
+    component: Search
   }
 ]
 
