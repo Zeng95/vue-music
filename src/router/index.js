@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Singer from '@v/Singer.vue'
 import Search from '@v/Search.vue'
 import Toplist from '@v/Toplist.vue'
-import Recommendation from '@v/Recommendation.vue'
+import Recommendations from '@v/Recommendations.vue'
 
 Vue.use(VueRouter)
 
@@ -11,12 +11,12 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: { name: 'recommendation' }
+    redirect: { name: 'recommendations' }
   },
   {
-    path: '/recommendation',
-    name: 'recommendation',
-    component: Recommendation
+    path: '/recommendations',
+    name: 'recommendations',
+    component: Recommendations
   },
   {
     path: '/singer',

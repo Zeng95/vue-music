@@ -21,7 +21,7 @@ export default {
     return {
       tabs: [
         {
-          location: '/recommendation',
+          location: '/recommendations',
           name: '推荐'
         },
         {

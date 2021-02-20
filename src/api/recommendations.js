@@ -1,7 +1,7 @@
 import jsonp from '@a/scripts/jsonp'
 import { commonParams, options } from './config.js'
 
-const getRecommendation = () => {
+const getRecommendations = () => {
   const url =
     'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
@@ -14,4 +14,4 @@ const getRecommendation = () => {
   return jsonp(url, data, options)
 }
 
-export { getRecommendation }
+export { getRecommendations }
