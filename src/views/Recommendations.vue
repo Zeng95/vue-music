@@ -5,7 +5,7 @@
       <li v-for="item in recommendations" :key="item.id">
         <!-- :href="item.linkUrl" -->
         <a class="block">
-          <img :src="item.picUrl" />
+          <img :src="item.picUrl" alt="banner" />
         </a>
       </li>
     </Carousel>
@@ -20,7 +20,7 @@
         >
           <!-- 歌曲封面 -->
           <div class="icon">
-            <img :src="item.imgurl" alt="icon" width="60" height="60" />
+            <img v-lazy="item.imgurl" alt="icon" width="60" height="60" />
           </div>
           <!-- 歌单信息 -->
           <div class="info flex-1">
