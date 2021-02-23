@@ -1,15 +1,16 @@
 <template>
   <!-- 轮播图 -->
-  <div class="carousel relative overflow-hidden" ref="carousel">
+  <div ref="carousel" class="carousel relative overflow-hidden">
     <!-- 图片列表 -->
-    <transition-group
-      :tag="tag"
-      class="track flex"
-      name="carousel-list"
+    <ul
       ref="carouselList"
+      class="carousel-track flex h-full"
+      @touchstart="onTouchStart"
+      @touchmove="onTouchMove"
+      @touchend="onTouchEnd"
     >
       <slot></slot>
-    </transition-group>
+    </ul>
     <!-- 指示器 -->
     <ol class="indicators flex justify-center absolute w-full">
       <li
@@ -36,7 +37,7 @@ export default {
       type: Number,
       default: 3000
     },
-    autoplay: {
+    autoPlay: {
       type: Boolean,
       default: true
     },
@@ -48,23 +49,101 @@ export default {
   data() {
     return {
       indicators: [],
-      currentIndex: 0
+      timer: null,
+      currentIndex: 0,
+
+      carousel: null,
+      carouselList: null,
+      carouselItems: null,
+      carouselWidth: 0,
+
+      touchStartX: 0,
+      touchMoveX: 0,
+      moveX: 0,
+
+      flag: true
+    }
+  },
+  watch: {
+    currentIndex(newValue) {
+      if (newValue > this.carouselItems.length - 1) {
+        this.currentIndex = 0
+      } else if (newValue < 0) {
+        this.currentIndex = this.carouselItems.length - 1
+      }
     }
   },
   methods: {
-    initCarousel() {
-      this.carouselItems = this.$refs.carouselList.children
+    onTouchStart(event) {
+      // 手指开始触摸事件
+      console.info('TEST Leo --- touch start event', event)
+      if (this.flag) {
+        this.touchStartX = event.targetTouches[0].clientX
+      }
+    },
+    onTouchMove(event) {
+      // 手指开始移动
+      console.info('TEST Leo --- touch move event', event)
+      if (this.flag) {
+        this.touchMoveX = event.targetTouches[0].clientX
+        this.moveX =
+          this.currentIndex * this.carouselWidth +
+          (this.touchStartX - this.touchMoveX)
+
+        this.carouselList.style.transform = `translate3d(-${this.moveX}px, 0, 0)`
+      }
+    },
+    onTouchEnd(event) {
+      // 手指结束触摸
+      console.info('TEST Leo --- touch end event', event)
+      if (this.flag) {
+        // this.flag = false
+      }
+    },
+    next() {
+      this.currentIndex += 1
+
+      this.carouselList.style.transition = 'all .4s' // 切换下一张图片
+      this.carouselList.style.transform = `translateX(${this.translateX}px)`
+    },
+    prev() {
+      this.currentIndex -= 1
+    },
+    playCarousel() {
+      this.timer = setInterval(this.next, this.interval)
+    },
+    setCarouselWidth() {
+      this.carousel = this.$refs.carousel
+      this.carouselList = this.$refs.carouselList
+      this.carouselItems = this.carouselList.children
+      this.carouselWidth = this.carousel.clientWidth // Get the inner width of carousel in pixels
+
+      let width = 0
+
       this.carouselItems.forEach(item => {
-        addClass(item.elm, ['item'])
+        addClass(item, ['carousel-item'])
+
+        item.style.width = `${this.carouselWidth}px`
+        width += this.carouselWidth
       })
+
+      this.carouselList.style.width = `${width}px`
     },
     initIndicators() {
       this.indicators = new Array(this.carouselItems.length)
     }
   },
   mounted() {
-    this.initCarousel()
+    this.setCarouselWidth()
     this.initIndicators()
+
+    // if (this.autoPlay) {
+    //   this.playCarousel()
+    // }
+  },
+  destroyed() {
+    console.info('TEST Leo --- Destroyed the component')
+    clearInterval(this.timer)
   }
 }
 </script>
@@ -73,9 +152,10 @@ export default {
 @import '@a/styles/scss/variables';
 
 ::v-deep.carousel {
-  .item {
+  cursor: grab;
+  .carousel-item {
     flex-shrink: 0;
-    width: 100%;
+    height: 100%;
   }
 
   .indicators {
