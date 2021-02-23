@@ -1,9 +1,9 @@
 <template>
   <div id="recommendations" class="fixed">
-    <Scroll ref="scroll" :scrollData="playList">
+    <Scroll v-if="showScroll" ref="scroll" :scrollData="playList">
       <div class="recommendations-content">
         <!-- 轮播图 -->
-        <Carousel v-if="recommendations.length > 0">
+        <Carousel>
           <li v-for="item in recommendations" :key="item.id">
             <!-- :href="item.linkUrl" -->
             <a class="block">
@@ -34,18 +34,22 @@
         </div>
       </div>
     </Scroll>
+    <div v-else class="loading-container">
+      <Loading />
+    </div>
   </div>
 </template>
 
 <script>
 import { getRecommendationList, getPlayList } from '@api/recommendations'
 import { ERR_OK } from '@api/config'
-import Carousel from '@s/Carousel'
 import Scroll from '@s/Scroll'
+import Carousel from '@s/Carousel'
+import Loading from '@s/Loading'
 
 export default {
   name: 'Recommendations',
-  components: { Carousel, Scroll },
+  components: { Scroll, Carousel, Loading },
   data() {
     return {
       recommendations: [],
@@ -59,7 +63,7 @@ export default {
       try {
         const response = await getRecommendationList()
         if (response.code === ERR_OK) {
-          console.info('TEST Leo --- Receive Recommendation List:', response)
+          console.info('TEST Leo --- Receive Carousel List:', response)
           this.recommendations = response.data.slider
         }
       } catch (err) {
@@ -81,13 +85,19 @@ export default {
     // Detect when the images are loaded
     onImageLoad() {
       if (!this.isLoaded) {
+        console.info('TEST Leo --- The Recommendation List Images Are Loaded')
         this.isLoaded = true
         this.$refs.scroll.refresh()
       }
     }
   },
+  computed: {
+    showScroll() {
+      return this.recommendations.length > 0
+    }
+  },
   created() {
-    console.info('TEST Leo --- Trigger Created Method In Recommendations')
+    console.info('TEST Leo --- Trigger Created Method In The Recommendations')
     this.getRecommendations()
     this.getSongList()
   }
@@ -134,6 +144,14 @@ export default {
         color: rgba(255, 255, 255, 0.3);
       }
     }
+  }
+
+  .loading-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translate3d(0, -50%, 0);
   }
 }
 </style>
