@@ -1,8 +1,6 @@
 <template>
-  <div id="recommendations" class="fixed w-full">
-    <!-- BetterScroll -->
+  <div id="recommendations" class="fixed">
     <Scroll :scrollData="scrollData">
-      <!-- 组件内容 -->
       <div class="recommendations-content">
         <!-- 轮播图 -->
         <Carousel v-if="recommendations.length > 0">
@@ -105,6 +103,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
   .recommendation-list {
     .title {
       width: 100%;

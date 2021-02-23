@@ -16,6 +16,7 @@ export default {
 @import '@a/styles/scss/mixin';
 
 header {
+  width: 100%;
   height: 44px;
   color: #ffcd32;
   font-size: 0;

@@ -1,6 +1,6 @@
 <template>
   <nav id="tabs">
-    <ul class="tab-list flex h-full">
+    <ul class="tab-list flex w-full h-full">
       <router-link
         tag="li"
         v-for="tab in tabs"
@@ -46,6 +46,7 @@ export default {
 @import '@a/styles/scss/variables';
 
 #tabs {
+  width: 100%;
   height: 44px;
   line-height: 44px;
   .tab-item {
