@@ -1,14 +1,14 @@
 <template>
   <nav id="tabs">
-    <ul class="tab-list flex">
+    <ul class="tab-list flex h-full">
       <router-link
         tag="li"
         v-for="tab in tabs"
         :key="tab.name"
-        class="tab-item flex-1 text-center"
         :to="tab.location"
+        class="tab-item flex-1 flex justify-center items-center leading-none"
       >
-        <span class="item-name">{{ tab.name }}</span>
+        <span class="item-link">{{ tab.name }}</span>
       </router-link>
     </ul>
   </nav>
@@ -50,15 +50,16 @@ export default {
   line-height: 44px;
   .tab-item {
     &.router-link-active {
-      .item-name {
+      .item-link {
         color: $color-theme-yellow;
         border-bottom: 2px solid $color-theme-yellow;
       }
     }
 
-    .item-name {
+    .item-link {
       padding-bottom: 5px;
       color: $color-text-light;
+      font-size: $font-size-md;
     }
   }
 }

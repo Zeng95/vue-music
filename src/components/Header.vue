@@ -1,7 +1,7 @@
 <template>
   <header class="relative flex justify-center items-center">
     <div class="icon bg-center bg-no-repeat"></div>
-    <h1 class="title">炸鸡音乐</h1>
+    <h1 class="title">Chicken Music</h1>
   </header>
 </template>
 
