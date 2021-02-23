@@ -1,13 +1,13 @@
 <template>
   <div id="recommendations" class="fixed">
-    <Scroll :scrollData="scrollData">
+    <Scroll ref="scroll" :scrollData="playList">
       <div class="recommendations-content">
         <!-- 轮播图 -->
         <Carousel v-if="recommendations.length > 0">
           <li v-for="item in recommendations" :key="item.id">
             <!-- :href="item.linkUrl" -->
             <a class="block">
-              <img :src="item.picUrl" alt="banner" />
+              <img :src="item.picUrl" alt="banner" @load="onImageLoad" />
             </a>
           </li>
         </Carousel>
@@ -24,7 +24,7 @@
               <div class="icon">
                 <img v-lazy="item.imgurl" alt="icon" width="60" height="60" />
               </div>
-              <!-- 歌单信息 -->
+              <!-- 歌曲信息 -->
               <div class="info flex-1">
                 <h2 class="name">{{ item.creator.name }}</h2>
                 <p class="description truncate">{{ item.dissname }}</p>
@@ -49,11 +49,12 @@ export default {
   data() {
     return {
       recommendations: [],
-      playList: []
+      playList: [],
+      isLoaded: false
     }
   },
   methods: {
-    // 轮播图推荐列表
+    // 轮播图列表
     async getRecommendations() {
       try {
         const response = await getRecommendationList()
@@ -65,7 +66,7 @@ export default {
         console.error(`Request Error: ${err}`)
       }
     },
-    // 歌单推荐列表
+    // 歌单列表
     async getSongList() {
       try {
         const { data: response } = await getPlayList()
@@ -76,15 +77,13 @@ export default {
       } catch (err) {
         console.error(`Request Error: ${err}`)
       }
-    }
-  },
-  computed: {
-    scrollData() {
-      if (this.recommendations.length > 0 && this.playList.length > 0) {
-        return [...this.recommendations, ...this.playList]
+    },
+    // Detect when the images are loaded
+    onImageLoad() {
+      if (!this.isLoaded) {
+        this.isLoaded = true
+        this.$refs.scroll.refresh()
       }
-
-      return []
     }
   },
   created() {
@@ -104,6 +103,7 @@ export default {
   right: 0;
   bottom: 0;
   width: 100%;
+  overflow: hidden;
   .recommendation-list {
     .title {
       width: 100%;

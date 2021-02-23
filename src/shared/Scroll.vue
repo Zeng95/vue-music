@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     initScroll() {
-      console.info('TEST Leo --- Receive Scroll Wrapper:', this.$refs.wrapper)
       if (!this.$refs.wrapper) {
         return false
       }
@@ -47,7 +46,7 @@ export default {
       this.scroll && this.scroll.disable()
     },
     refresh() {
-      console.info('TEST Leo --- Receive Scroll Object:', this.scroll)
+      console.info('TEST Leo --- Ready To Refresh Scroll')
       this.scroll && this.scroll.refresh()
     }
   },
@@ -55,9 +54,7 @@ export default {
     scrollData(newValue) {
       if (newValue.length > 0) {
         console.info('TEST Leo --- Receive Scroll Data:', newValue)
-        this.$nextTick(() => {
-          this.refresh()
-        })
+        this.$nextTick(() => this.refresh())
       }
     }
   },
@@ -71,6 +68,5 @@ export default {
 #scroll {
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 </style>
