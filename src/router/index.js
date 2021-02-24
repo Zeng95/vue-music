@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Singer from '@v/Singer.vue'
+import Singers from '@v/Singers.vue'
 import Search from '@v/Search.vue'
 import Toplist from '@v/Toplist.vue'
 import Recommendations from '@v/Recommendations.vue'
@@ -19,9 +19,9 @@ const routes = [
     component: Recommendations
   },
   {
-    path: '/singer',
-    name: 'singer',
-    component: Singer
+    path: '/singers',
+    name: 'singers',
+    component: Singers
   },
   {
     path: '/toplist',

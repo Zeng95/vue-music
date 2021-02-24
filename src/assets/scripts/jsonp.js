@@ -15,10 +15,11 @@ const parameters = data => {
 const jsonp = (url, data, options) => {
   // Gives the position of the first occurrence of the string passed as parameter in the current string.
   // Returns -1 if the string is not found.
-  url += url.indexOf('?') === -1 ? '?' : '&' + parameters(data)
+  const queryString = (url.indexOf('?') === -1 ? '?' : '&') + parameters(data)
+  const fullURL = url + queryString
 
   return new Promise((resolve, reject) => {
-    originJSONP(url, options, (err, data) => {
+    originJSONP(fullURL, options, (err, data) => {
       if (!err) {
         resolve(data)
       } else {

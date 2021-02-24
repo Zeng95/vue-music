@@ -25,7 +25,7 @@ export default {
           name: '推荐'
         },
         {
-          location: '/singer',
+          location: '/singers',
           name: '歌手'
         },
         {
