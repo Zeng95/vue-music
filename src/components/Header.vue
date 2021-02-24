@@ -13,7 +13,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@a/styles/scss/variables';
-@import '@a/styles/scss/mixin';
+@import '@a/styles/scss/mixins';
 
 header {
   width: 100%;

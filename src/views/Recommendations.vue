@@ -1,8 +1,9 @@
 <template>
-  <div id="recommendations" class="fixed">
+  <div id="recommendations">
+    <!-- 滚动内容 -->
     <Scroll v-if="showScroll" ref="scroll" :scrollData="playList">
       <div class="recommendations-content">
-        <!-- 轮播图 -->
+        <!-- 轮播 -->
         <Carousel>
           <li v-for="item in recommendations" :key="item.id">
             <!-- :href="item.linkUrl" -->
@@ -34,6 +35,7 @@
         </div>
       </div>
     </Scroll>
+    <!-- Loading -->
     <div v-else class="loading-container">
       <Loading />
     </div>
@@ -41,11 +43,11 @@
 </template>
 
 <script>
-import { getRecommendationList, getPlayList } from '@api/recommendations'
 import { ERR_OK } from '@api/config'
+import { getRecommendationList, getPlayList } from '@api/recommendations'
+import Loading from '@s/Loading'
 import Scroll from '@s/Scroll'
 import Carousel from '@s/Carousel'
-import Loading from '@s/Loading'
 
 export default {
   name: 'Recommendations',
@@ -97,7 +99,7 @@ export default {
     }
   },
   created() {
-    console.info('TEST Leo --- Trigger Created Method In The Recommendations')
+    console.info('TEST Leo --- Trigger Created Method In Recommendations Page')
     this.getRecommendations()
     this.getSongList()
   }
@@ -106,13 +108,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '@a/styles/scss/variables';
+@import '@a/styles/scss/mixins';
 
 #recommendations {
-  top: 88px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
+  @include fixed-top;
   overflow: hidden;
   .recommendation-list {
     .title {
