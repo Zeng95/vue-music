@@ -2,9 +2,11 @@
   <div id="app">
     <Header />
     <Tabs />
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <transition name="fade" mode="out-in">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
@@ -20,3 +22,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
