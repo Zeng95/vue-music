@@ -59,6 +59,11 @@ export default {
       isLoaded: false
     }
   },
+  computed: {
+    showScroll() {
+      return this.recommendations.length > 0
+    }
+  },
   methods: {
     // 轮播图列表
     async getRecommendations() {
@@ -91,11 +96,6 @@ export default {
         this.isLoaded = true
         this.$refs.scroll.refresh()
       }
-    }
-  },
-  computed: {
-    showScroll() {
-      return this.recommendations.length > 0
     }
   },
   created() {

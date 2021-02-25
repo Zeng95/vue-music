@@ -20,7 +20,9 @@ export default {
     },
     scrollData: {
       type: Array,
-      default: null
+      default: () => {
+        return []
+      }
     }
   },
   data() {
@@ -54,7 +56,7 @@ export default {
     scrollData(newValue) {
       if (newValue.length > 0) {
         console.info('TEST Leo --- Receive Scroll Data:', newValue)
-        this.$nextTick(() => this.refresh())
+        setTimeout(() => this.refresh(), 500)
       }
     }
   },
