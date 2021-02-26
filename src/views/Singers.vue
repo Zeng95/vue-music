@@ -15,9 +15,9 @@
 import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
 import Singer from '@a/scripts/singer'
+import ListView from '@s/ListView'
 import Loading from '@s/Loading'
 import Scroll from '@s/Scroll'
-import ListView from '@s/ListView'
 
 const POPULAR_NAME = '热门'
 const POPULAR_SINGERS_LENGTH = 10
