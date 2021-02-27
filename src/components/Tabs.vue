@@ -4,7 +4,7 @@
       <router-link
         tag="li"
         v-for="tab in tabs"
-        :key="tab.name"
+        :key="`id-${tab.name}`"
         :to="tab.location"
         class="tab-item flex-1 flex justify-center items-center leading-none"
       >

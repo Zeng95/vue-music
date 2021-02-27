@@ -1,5 +1,5 @@
 <template>
-  <div id="scroll" ref="wrapper">
+  <div class="scroll" ref="wrapper">
     <slot></slot>
   </div>
 </template>
@@ -48,14 +48,19 @@ export default {
       this.scroll && this.scroll.disable()
     },
     refresh() {
-      console.info('TEST Leo --- Ready To Refresh Scroll')
+      console.info('Test Leo - ready to refresh scroll')
       this.scroll && this.scroll.refresh()
+    },
+    // Scroll the contents to the specified dom element
+    scrollToElement() {
+      console.info('Test Leo - receive arguments:', arguments)
+      this.scroll && this.scroll.scrollToElement(...arguments)
     }
   },
   watch: {
     scrollData(newValue) {
       if (newValue.length > 0) {
-        console.info('TEST Leo --- Receive Scroll Data:', newValue)
+        console.info('Test Leo - receive scroll data:', newValue)
         setTimeout(() => this.refresh(), 500)
       }
     }
@@ -67,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#scroll {
+.scroll {
   width: 100%;
   height: 100%;
 }

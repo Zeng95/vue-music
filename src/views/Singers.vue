@@ -1,13 +1,6 @@
 <template>
   <div id="singers">
-    <!-- 滚动内容 -->
-    <Scroll v-if="showScroll" ref="scroll" :scrollData="groupList">
-      <ListView :groupList="groupList" />
-    </Scroll>
-    <!-- Loading -->
-    <div v-else class="loading-container">
-      <Loading />
-    </div>
+    <ListView :groupList="groupList" />
   </div>
 </template>
 
@@ -16,23 +9,17 @@ import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
 import Singer from '@a/scripts/singer'
 import ListView from '@s/ListView'
-import Loading from '@s/Loading'
-import Scroll from '@s/Scroll'
+// import Loading from '@s/Loading'
 
 const POPULAR_NAME = '热门'
 const POPULAR_SINGERS_LENGTH = 10
 
 export default {
   name: 'Singers',
-  components: { Scroll, ListView, Loading },
+  components: { ListView },
   data() {
     return {
       groupList: []
-    }
-  },
-  computed: {
-    showScroll() {
-      return this.groupList.length > 0
     }
   },
   methods: {
@@ -41,7 +28,7 @@ export default {
       try {
         const response = await getSingerList()
         if (response.code === ERR_OK) {
-          console.info('TEST Leo --- Receive Singer List:', response)
+          console.info('Test Leo - receive singer list:', response)
           this.groupList = this.normalizeGroupList(response.data.list)
         }
       } catch (err) {
@@ -98,7 +85,7 @@ export default {
     }
   },
   created() {
-    console.info('TEST Leo --- Trigger Created Method In Singers Page')
+    console.info('Test Leo - trigger created method in Singers page')
     this.getSingers()
   }
 }

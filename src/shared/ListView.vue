@@ -1,9 +1,14 @@
 <template>
-  <div id="list-view">
+  <Scroll id="list-view" :scrollData="groupList" ref="scroll">
     <!-- List 歌手列表 -->
     <div class="list-group">
       <ol>
-        <li v-for="item in groupList" :key="item.title" class="list-group-item">
+        <li
+          v-for="item in groupList"
+          :key="`id-${item.title}`"
+          class="list-group-item"
+          ref="listGroupItem"
+        >
           <!-- 标题 -->
           <h2 class="title">{{ item.title }}</h2>
           <!-- 歌手 -->
@@ -27,19 +32,32 @@
       </ol>
     </div>
     <!-- IndexBar 索引栏 -->
-    <div class="index-bar absolute">
+    <div
+      class="index-bar absolute"
+      @touchstart="onIndexBarTouchStart"
+      @touchmove="onIndexBarTouchMove"
+    >
       <ol>
-        <li v-for="item in indexList" :key="item" class="index">
+        <li
+          v-for="(item, index) in indexList"
+          :key="item"
+          :data-index="index"
+          class="index"
+        >
           {{ item }}
         </li>
       </ol>
     </div>
-  </div>
+  </Scroll>
 </template>
 
 <script>
+import { getData } from '@a/scripts/dom'
+import Scroll from '@s/Scroll'
+
 export default {
   name: 'ListView',
+  components: { Scroll },
   props: {
     groupList: {
       type: Array,
@@ -50,13 +68,54 @@ export default {
   },
   computed: {
     indexList() {
-      // returns the array of results
+      // Returns the array of results
       let result = this.groupList.map(item => {
-        return item.title.slice(0, 1)
+        // Returns the part of the string from start, with the given length
+        return item.title.substr(0, 1)
       })
 
       return result
+    },
+    showScroll() {
+      return this.groupList.length > 0
     }
+  },
+  methods: {
+    onIndexBarTouchStart(event) {
+      // 手指开始触摸事件
+      console.info('Test Leo - touch start event', event)
+
+      const anchorIndex = getData(event.target, 'index')
+
+      this.touch.startY = event.targetTouches[0].pageY
+      this.touch.anchorIndex = anchorIndex
+      this._scrollTo(anchorIndex)
+    },
+    onIndexBarTouchMove(event) {
+      // 手指开始移动事件
+      console.info('Test Leo - touch move event', event)
+
+      this.touch.moveY = event.targetTouches[0].pageY
+      this.touch.delta = this.touch.startY - this.touch.moveY
+
+      console.info(this.touch.delta)
+    },
+    // 函数名前加下划线表示“私有函数”
+    // 加下划线，还能有效防止重名。
+    _scrollTo(index) {
+      const scroll = this.$refs.scroll
+      const listGroupItems = this.$refs.listGroupItem
+
+      console.info('Test Leo - get anchor index', index)
+      console.info('Test Leo - get list group items', listGroupItems)
+
+      scroll.scrollToElement(listGroupItems[index], 0)
+    }
+  },
+  created() {
+    // data 或者 props 里的数据都会被添加 getter and setter
+    // 因为并不需要监听 touch 的变化，所以提前在 created method 中创建，并且可以在整个组件中使用
+    this.touch = {}
   }
 }
 </script>
@@ -65,6 +124,9 @@ export default {
 @import '@a/styles/scss/variables';
 
 #list-view {
+  position: relative;
+  overflow: hidden;
+  background: $color-background-current;
   .list-group-item {
     padding-bottom: 30px;
     .title {
@@ -99,8 +161,9 @@ export default {
     text-align: center;
     background: $color-background-dark;
     font-family: Helvetica;
+    z-index: 100;
     .index {
-      padding: 3px;
+      padding: 3px 4px;
       font-size: $font-size-sm;
       color: $color-text-light;
     }

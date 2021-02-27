@@ -1,6 +1,6 @@
 import originJSONP from 'jsonp'
 
-const parameters = data => {
+function parameters(data) {
   let url = ''
 
   for (let k in data) {
@@ -12,7 +12,7 @@ const parameters = data => {
   return url ? url.substring(1) : ''
 }
 
-const jsonp = (url, data, options) => {
+function jsonp(url, data, options) {
   // Gives the position of the first occurrence of the string passed as parameter in the current string.
   // Returns -1 if the string is not found.
   const queryString = (url.indexOf('?') === -1 ? '?' : '&') + parameters(data)

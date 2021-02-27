@@ -1,4 +1,4 @@
-const addClass = (el, className) => {
+function addClass(el, className) {
   if (hasClass(el, className)) {
     return false
   }
@@ -13,10 +13,22 @@ const addClass = (el, className) => {
   el.classList.add(className)
 }
 
-const hasClass = (el, className) => {
+function hasClass(el, className) {
   // Check if an element contains a class
   // We use the contains() method of the classList property of the element
   return el.classList.contains(className)
 }
 
-export { addClass, hasClass }
+function getData(el, name, value) {
+  const prefix = 'data-'
+  name = prefix + name
+
+  if (value) {
+    el.setAttribute(name, value)
+  } else {
+    const attribute = el.getAttribute(name)
+    return attribute
+  }
+}
+
+export { addClass, hasClass, getData }

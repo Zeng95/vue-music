@@ -1,7 +1,7 @@
 <template>
   <div id="recommendations">
     <!-- 滚动内容 -->
-    <Scroll v-if="showScroll" ref="scroll" :scrollData="playList">
+    <Scroll v-if="showScroll" :scrollData="playList" ref="scroll">
       <div class="recommendations-content">
         <!-- 轮播 -->
         <Carousel>
@@ -92,14 +92,14 @@ export default {
     // Detect when the images are loaded
     onImageLoad() {
       if (!this.isLoaded) {
-        console.info('TEST Leo --- The Recommendation List Images Are Loaded')
+        console.info('Test Leo - the recommendation list images are loaded')
         this.isLoaded = true
         this.$refs.scroll.refresh()
       }
     }
   },
   created() {
-    console.info('TEST Leo --- Trigger Created Method In Recommendations Page')
+    console.info('Test Leo - trigger created method in Recommendations page')
     this.getRecommendations()
     this.getSongList()
   }
