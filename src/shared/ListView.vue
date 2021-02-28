@@ -17,6 +17,7 @@
               v-for="singer in item.singers"
               :key="singer.id"
               class="singer flex items-center"
+              @click="onClickSinger(singer)"
             >
               <div class="avatar">
                 <img
@@ -43,6 +44,7 @@
           :key="item"
           :data-index="index"
           class="index"
+          :class="{ active: currentIndex === index }"
           ref="indexAnchor"
         >
           {{ item }}
@@ -81,12 +83,22 @@ export default {
       return this.groupList.length > 0
     }
   },
+  data() {
+    return {
+      currentIndex: 0
+    }
+  },
   methods: {
+    onClickSinger(singer) {
+      // ListView 是一个基础组件，所以不应该包含任何业务逻辑相关的代码
+      console.info('Test Leo - select a singer')
+      this.$emit('select', singer)
+    },
     onIndexBarTouchStart(event) {
       // 手指开始触摸事件
       console.info('Test Leo - touch start event', event)
 
-      const anchorIndex = getData(event.target, 'index')
+      const anchorIndex = parseInt(getData(event.target, 'index'))
 
       this.touch.startY = event.targetTouches[0].pageY
       this.touch.anchorIndex = anchorIndex
@@ -119,10 +131,12 @@ export default {
       this._scrollTo(anchorIndex)
     },
     // 函数名前加下划线表示“私有函数”
-    // 加下划线，还能有效防止重名。
+    // 加下划线，还能有效防止重名
     _scrollTo(index) {
       const scroll = this.$refs.scroll
       const listGroupItems = this.$refs.listGroupItem
+
+      this.currentIndex = index
 
       console.info('Test Leo - get list group items', listGroupItems)
       console.info('Test Leo - get anchor index', index)
@@ -176,6 +190,7 @@ export default {
     right: 0;
     transform: translate3d(0, -50%, 0);
     width: 20px;
+    border-radius: 10px;
     text-align: center;
     background: $color-background-dark;
     font-family: Helvetica;
@@ -184,6 +199,9 @@ export default {
       padding: 3px 4px;
       font-size: $font-size-sm;
       color: $color-text-light;
+      &.active {
+        color: $color-theme-yellow;
+      }
     }
   }
 }

@@ -1,6 +1,9 @@
 <template>
   <div id="singers">
-    <ListView :groupList="groupList" />
+    <ListView :group-list="groupList" @select="showSingerDetails" />
+    <transition name="slide">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -9,7 +12,6 @@ import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
 import Singer from '@a/scripts/singer'
 import ListView from '@s/ListView'
-// import Loading from '@s/Loading'
 
 const POPULAR_NAME = '热门'
 const POPULAR_SINGERS_LENGTH = 10
@@ -82,6 +84,13 @@ export default {
     // 比较字母排序
     compareAlphabetical(a, b) {
       return a['title'].localeCompare(b['title'])
+    },
+    // 跳转到 SingerDetails 路由页面
+    showSingerDetails(singer) {
+      this.$router.push({
+        name: 'SingerDetails',
+        params: { id: singer.id }
+      })
     }
   },
   created() {
@@ -104,6 +113,17 @@ export default {
     left: 0;
     width: 100%;
     transform: translate3d(0, -50%, 0);
+  }
+
+  .slide-enter-active,
+  .slide-leave-active {
+    transition: all 0.3s ease;
+  }
+
+  .slide-enter,
+  .slide-leave-to {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
   }
 }
 </style>

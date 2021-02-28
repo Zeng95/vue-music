@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Singers from '@v/Singers.vue'
-import Search from '@v/Search.vue'
-import Toplist from '@v/Toplist.vue'
-import Recommendations from '@v/Recommendations.vue'
+import Singers from '@v/Singers'
+import SingerDetails from '@v/SingerDetails'
+import Search from '@v/Search'
+import Toplist from '@v/Toplist'
+import Recommendations from '@v/Recommendations'
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,14 @@ const routes = [
   {
     path: '/singers',
     name: 'singers',
-    component: Singers
+    component: Singers,
+    children: [
+      {
+        path: ':id/details',
+        name: 'SingerDetails',
+        component: SingerDetails
+      }
+    ]
   },
   {
     path: '/toplist',

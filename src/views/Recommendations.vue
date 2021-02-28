@@ -52,16 +52,16 @@ import Carousel from '@s/Carousel'
 export default {
   name: 'Recommendations',
   components: { Scroll, Carousel, Loading },
+  computed: {
+    showScroll() {
+      return this.recommendations.length > 0
+    }
+  },
   data() {
     return {
       recommendations: [],
       playList: [],
       isLoaded: false
-    }
-  },
-  computed: {
-    showScroll() {
-      return this.recommendations.length > 0
     }
   },
   methods: {
