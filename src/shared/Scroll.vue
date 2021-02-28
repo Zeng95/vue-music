@@ -49,11 +49,13 @@ export default {
     },
     refresh() {
       console.info('Test Leo - ready to refresh scroll')
+      console.info('------')
       this.scroll && this.scroll.refresh()
     },
     // Scroll the contents to the specified dom element
     scrollToElement() {
       console.info('Test Leo - receive arguments:', arguments)
+      console.info('------')
       this.scroll && this.scroll.scrollToElement(...arguments)
     }
   },
