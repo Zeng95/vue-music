@@ -10,7 +10,7 @@
           ref="listGroupItem"
         >
           <!-- 标题 -->
-          <h2 class="title">{{ item.title }}</h2>
+          <h2 class="index-anchor">{{ item.title }}</h2>
           <!-- 歌手 -->
           <ul class="singers">
             <li
@@ -43,6 +43,7 @@
           :key="item"
           :data-index="index"
           class="index"
+          ref="indexAnchor"
         >
           {{ item }}
         </li>
@@ -96,9 +97,26 @@ export default {
       console.info('Test Leo - touch move event', event)
 
       this.touch.moveY = event.targetTouches[0].pageY
-      this.touch.delta = this.touch.startY - this.touch.moveY
+      let indexAnchorHeight = this.$refs.indexAnchor[0].offsetHeight
+      let moveY = 0
+      let anchorIndex
 
-      console.info(this.touch.delta)
+      // 判断手指垂直移动方向
+      if (this.touch.startY - this.touch.moveY < 0) {
+        // 手指向下移动
+        moveY = this.touch.moveY - this.touch.startY
+        anchorIndex =
+          parseInt(this.touch.anchorIndex) +
+          Math.ceil(moveY / indexAnchorHeight)
+      } else {
+        // 手指向上移动
+        moveY = this.touch.startY - this.touch.moveY
+        anchorIndex =
+          parseInt(this.touch.anchorIndex) -
+          Math.ceil(moveY / indexAnchorHeight)
+      }
+
+      this._scrollTo(anchorIndex)
     },
     // 函数名前加下划线表示“私有函数”
     // 加下划线，还能有效防止重名。
@@ -106,8 +124,8 @@ export default {
       const scroll = this.$refs.scroll
       const listGroupItems = this.$refs.listGroupItem
 
-      console.info('Test Leo - get anchor index', index)
       console.info('Test Leo - get list group items', listGroupItems)
+      console.info('Test Leo - get anchor index', index)
 
       scroll.scrollToElement(listGroupItems[index], 0)
     }
@@ -129,7 +147,7 @@ export default {
   background: $color-background-current;
   .list-group-item {
     padding-bottom: 30px;
-    .title {
+    .index-anchor {
       height: 30px;
       line-height: 30px;
       padding-left: 20px;
