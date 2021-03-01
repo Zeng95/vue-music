@@ -93,7 +93,7 @@ export default {
     showSingerDetails(singer) {
       this.setSinger(singer)
       this.$router.push({
-        name: 'SingerDetails',
+        name: 'singerDetails',
         params: { id: singer.id }
       })
     }

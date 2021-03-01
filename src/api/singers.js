@@ -1,7 +1,7 @@
 import jsonp from '@a/scripts/jsonp'
 import { commonParams, options } from './config.js'
 
-const getSingerList = () => {
+function getSingerList() {
   const url = `${process.env.VUE_APP_BASE_URL}/v8/fcg-bin/v8.fcg`
 
   const data = Object.assign({}, commonParams, {
@@ -18,4 +18,21 @@ const getSingerList = () => {
   return jsonp(url, data, options)
 }
 
-export { getSingerList }
+function getSingerDetails(singerId) {
+  const url = `${process.env.VUE_APP_BASE_URL}/v8/fcg-bin/fcg_v8_singer_track_cp.fcg`
+
+  const data = Object.assign({}, commonParams, {
+    hostUin: 0,
+    needNewCode: 0,
+    platform: 'yqq',
+    order: 'listen',
+    begin: 0,
+    num: 80,
+    songstatus: 1,
+    singermid: singerId
+  })
+
+  return jsonp(url, data, options)
+}
+
+export { getSingerList, getSingerDetails }

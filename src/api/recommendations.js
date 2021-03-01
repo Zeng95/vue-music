@@ -2,7 +2,7 @@ import axios from 'axios'
 import jsonp from '@a/scripts/jsonp'
 import { commonParams, options } from './config.js'
 
-const getRecommendationList = () => {
+function getRecommendationList() {
   const url = `${process.env.VUE_APP_BASE_URL}/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg`
 
   const data = Object.assign({}, commonParams, {
@@ -14,7 +14,7 @@ const getRecommendationList = () => {
   return jsonp(url, data, options)
 }
 
-const getPlayList = () => {
+function getPlayList() {
   const END_POINT = '/api/getPlayList'
 
   const data = Object.assign({}, commonParams, {

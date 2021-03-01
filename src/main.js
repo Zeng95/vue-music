@@ -8,12 +8,12 @@ import './registerServiceWorker'
 import '@a/styles/scss/index.scss'
 import '@a/styles/css/index.css'
 
-import loadimage from '@a/images/loading.gif'
-import errorimage from '@a/images/error.gif'
+import loading from '@a/images/loading.gif'
+import error from '@a/images/error.gif'
 
 Vue.use(VueLazyload, {
-  error: errorimage,
-  loading: loadimage
+  error,
+  loading
 })
 
 Vue.config.productionTip = false
