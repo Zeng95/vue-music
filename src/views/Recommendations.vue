@@ -70,7 +70,7 @@ export default {
       try {
         const response = await getRecommendationList()
         if (response.code === ERR_OK) {
-          console.info('TEST Leo --- Receive Carousel List:', response)
+          console.info('Test Leo - receive carousel list:', response)
           this.recommendations = response.data.slider
         }
       } catch (err) {
@@ -82,7 +82,7 @@ export default {
       try {
         const { data: response } = await getPlayList()
         if (response.code === ERR_OK) {
-          console.info('TEST Leo --- Receive Play List:', response)
+          console.info('Test Leo - receive play list:', response)
           this.playList = response.data.list
         }
       } catch (err) {

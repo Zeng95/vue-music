@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
 import Singer from '@a/scripts/singer'
@@ -25,20 +26,23 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('singers', {
+      setSinger: 'SET_SINGER'
+    }),
     // 歌手列表
     async getSingers() {
       try {
         const response = await getSingerList()
         if (response.code === ERR_OK) {
           console.info('Test Leo - receive singer list:', response)
-          this.groupList = this.normalizeGroupList(response.data.list)
+          this.groupList = this.normalizeSingerList(response.data.list)
         }
       } catch (err) {
         console.error(`Request Error: ${err}`)
       }
     },
     // 整合歌手数据
-    normalizeGroupList(list) {
+    normalizeSingerList(list) {
       let map = {
         popular: {
           title: POPULAR_NAME,
@@ -87,6 +91,7 @@ export default {
     },
     // 跳转到 SingerDetails 路由页面
     showSingerDetails(singer) {
+      this.setSinger(singer)
       this.$router.push({
         name: 'SingerDetails',
         params: { id: singer.id }

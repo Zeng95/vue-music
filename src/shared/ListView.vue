@@ -91,7 +91,6 @@ export default {
   methods: {
     onClickSinger(singer) {
       // ListView 是一个基础组件，所以不应该包含任何业务逻辑相关的代码
-      console.info('Test Leo - select a singer')
       this.$emit('select', singer)
     },
     onIndexBarTouchStart(event) {

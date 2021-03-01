@@ -5,8 +5,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'SingerDetails'
+  name: 'SingerDetails',
+  computed: {
+    ...mapGetters('singers', ['singer'])
+  },
+  methods: {},
+  created() {
+    console.info(
+      'Test Leo - trigger created method in SingerDetails page',
+      this.singer
+    )
+  }
 }
 </script>
 
