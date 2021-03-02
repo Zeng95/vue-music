@@ -5,6 +5,8 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
+        '@router': path.resolve(__dirname, 'src/router'),
+        '@store': path.resolve(__dirname, 'src/store'),
         '@api': path.resolve(__dirname, 'src/api'),
         '@a': path.resolve(__dirname, 'src/assets'),
         '@c': path.resolve(__dirname, 'src/components'),

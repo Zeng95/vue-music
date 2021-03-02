@@ -61,7 +61,7 @@ export default {
     return {
       recommendations: [],
       playList: [],
-      isLoaded: false
+      isImageLoaded: false
     }
   },
   methods: {
@@ -91,9 +91,9 @@ export default {
     },
     // Detect when the images are loaded
     onImageLoad() {
-      if (!this.isLoaded) {
+      if (!this.isImageLoaded) {
         console.info('Test Leo - the recommendation list images are loaded')
-        this.isLoaded = true
+        this.isImageLoaded = true
         this.$refs.scroll.refresh()
       }
     }

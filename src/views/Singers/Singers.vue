@@ -1,6 +1,6 @@
 <template>
   <div id="singers">
-    <ListView :group-list="groupList" @select="showSingerDetails" />
+    <ListView :group-list="groupList" @select="goToSingerDetails" />
     <transition name="slide">
       <router-view />
     </transition>
@@ -30,7 +30,7 @@ export default {
       setSinger: 'SET_SINGER'
     }),
     // 歌手列表
-    async getSingers() {
+    async fetchSingers() {
       try {
         const response = await getSingerList()
         if (response.code === ERR_OK) {
@@ -90,7 +90,7 @@ export default {
       return a['title'].localeCompare(b['title'])
     },
     // 跳转到 SingerDetails 路由页面
-    showSingerDetails(singer) {
+    goToSingerDetails(singer) {
       this.setSinger(singer)
       this.$router.push({
         name: 'singerDetails',
@@ -100,7 +100,7 @@ export default {
   },
   created() {
     console.info('Test Leo - trigger created method in Singers page')
-    this.getSingers()
+    this.fetchSingers()
   }
 }
 </script>
@@ -127,7 +127,6 @@ export default {
 
   .slide-enter,
   .slide-leave-to {
-    opacity: 0;
     transform: translate3d(100%, 0, 0);
   }
 }

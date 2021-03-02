@@ -9,17 +9,13 @@
       <!-- Singer Name -->
       <h1 class="singer-name text-center">{{ name }}</h1>
       <!-- Singer Image -->
-      <div class="singer-background-image absolute">
-        <img ref="bgImage" :src="bgImage" class="w-full" @load="onImageLoad" />
+      <div class="singer-background-image absolute" ref="bgImage">
+        <img :src="bgImage" class="absolute" />
         <div class="overlay absolute"></div>
       </div>
     </div>
     <!-- 歌曲列表 -->
-    <div
-      v-show="isImageLoaded"
-      class="song-list-wrapper absolute"
-      ref="songListWrapper"
-    >
+    <div class="song-list-wrapper absolute" ref="songListWrapper">
       <SongList :songList="songs" />
     </div>
   </div>
@@ -48,22 +44,16 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      isImageLoaded: false
-    }
-  },
   methods: {
     // 跳转到 Singers 路由页面
     goToSingers() {
       this.$router.push({
         name: 'singers'
       })
-    },
-    onImageLoad() {
-      this.isImageLoaded = true
-      this.$refs.songListWrapper.style.top = `calc(${this.$refs.bgImage.clientHeight}px - 17%)`
     }
+  },
+  mounted() {
+    this.$refs.songListWrapper.style.top = `${this.$refs.bgImage.clientHeight}px`
   }
 }
 </script>
@@ -94,10 +84,19 @@ export default {
       left: 0;
       right: 0;
       width: 100%;
+      height: 0;
+      padding-top: 70%;
       z-index: -1;
-      .overlay {
-        @extend .singer-background-image;
+      img {
+        top: 0;
+        left: 0;
+        right: 0;
         bottom: 0;
+        width: 100%;
+      }
+
+      .overlay {
+        @extend img;
         height: 100%;
         background: rgba(7, 17, 27, 0.4);
         z-index: 5;

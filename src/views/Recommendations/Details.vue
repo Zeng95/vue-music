@@ -1,10 +1,10 @@
 <template>
-  <div id="top-list">Ranking</div>
+  <div id="recommendation-details"></div>
 </template>
 
 <script>
 export default {
-  name: 'TopList'
+  name: 'RecommendationDetails'
 }
 </script>
 

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Singers from '@v/Singers'
-import SingerDetails from '@v/SingerDetails'
 import Search from '@v/Search'
 import Toplist from '@v/Toplist'
-import Recommendations from '@v/Recommendations'
+import Singers from '@v/Singers/Singers'
+import SingerDetails from '@v/Singers/Details'
+import Recommendations from '@v/Recommendations/Recommendations'
+import RecommendationDetails from '@v/Recommendations/Details'
 
 Vue.use(VueRouter)
 
@@ -17,7 +18,14 @@ const routes = [
   {
     path: '/recommendations',
     name: 'recommendations',
-    component: Recommendations
+    component: Recommendations,
+    children: [
+      {
+        path: ':id/details',
+        name: 'recommendationDetails',
+        component: RecommendationDetails
+      }
+    ]
   },
   {
     path: '/singers',
