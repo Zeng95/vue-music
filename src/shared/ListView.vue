@@ -1,37 +1,35 @@
 <template>
-  <Scroll id="list-view" :scrollData="groupList" ref="scroll">
+  <Scroll class="list-view" :scrollData="groupList" ref="scroll">
     <!-- List 歌手列表 -->
-    <div class="list-group">
-      <ol>
-        <li
-          v-for="item in groupList"
-          :key="`id-${item.title}`"
-          class="list-group-item"
-          ref="listGroupItem"
-        >
-          <!-- 标题 -->
-          <h2 class="index-anchor">{{ item.title }}</h2>
-          <!-- 歌手 -->
-          <ul class="singers">
-            <li
-              v-for="singer in item.singers"
-              :key="singer.id"
-              class="singer flex items-center"
-              @click="onClickSinger(singer)"
-            >
-              <div class="avatar">
-                <img
-                  v-lazy="singer.avatar"
-                  alt="singer avatar"
-                  class="rounded-full h-full"
-                />
-              </div>
-              <span class="name">{{ singer.name }}</span>
-            </li>
-          </ul>
-        </li>
-      </ol>
-    </div>
+    <ol class="list-group">
+      <li
+        v-for="item in groupList"
+        :key="`id-${item.title}`"
+        class="list-group-item"
+        ref="listGroupItem"
+      >
+        <!-- 标题 -->
+        <h2 class="index-anchor">{{ item.title }}</h2>
+        <!-- 歌手 -->
+        <ul class="singers">
+          <li
+            v-for="singer in item.singers"
+            :key="singer.id"
+            class="singer flex items-center"
+            @click="onClickSinger(singer)"
+          >
+            <div class="avatar">
+              <img
+                v-lazy="singer.avatar"
+                alt="singer avatar"
+                class="rounded-full h-full"
+              />
+            </div>
+            <span class="name">{{ singer.name }}</span>
+          </li>
+        </ul>
+      </li>
+    </ol>
     <!-- IndexBar 索引栏 -->
     <div
       class="index-bar absolute"
@@ -154,7 +152,7 @@ export default {
 <style lang="scss" scoped>
 @import '@a/styles/scss/variables';
 
-#list-view {
+.list-view {
   position: relative;
   overflow: hidden;
   background: $color-background-current;

@@ -56,8 +56,8 @@ function createSong(musicData) {
     albumName: musicData.albumname,
     albumPhoto: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}_3.jpg?max_age=2592000`,
 
-    duration: musicData.interval
-    // url: musicData.url
+    duration: musicData.interval,
+    url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=46`
   })
 }
 
