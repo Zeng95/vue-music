@@ -1,6 +1,15 @@
 <template>
   <div id="singers">
-    <ListView :group-list="groupList" @select="goToSingerDetails" />
+    <!-- 滚动内容 -->
+    <ListView
+      v-if="showScroll"
+      :group-list="groupList"
+      @select="goToSingerDetails"
+    />
+    <!-- Loading -->
+    <div v-else class="loading-container">
+      <Loading />
+    </div>
     <transition name="slide">
       <router-view />
     </transition>
@@ -11,6 +20,7 @@
 import { mapMutations } from 'vuex'
 import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
+import Loading from '@s/Loading'
 import Singer from '@a/scripts/singer'
 import ListView from '@s/ListView'
 
@@ -19,7 +29,12 @@ const POPULAR_SINGERS_LENGTH = 10
 
 export default {
   name: 'Singers',
-  components: { ListView },
+  components: { ListView, Loading },
+  computed: {
+    showScroll() {
+      return this.groupList.length > 0
+    }
+  },
   data() {
     return {
       groupList: []
@@ -30,11 +45,11 @@ export default {
       setSinger: 'SET_SINGER'
     }),
     // 歌手列表
-    async fetchSingers() {
+    async fetchSingerList() {
       try {
         const response = await getSingerList()
         if (response.code === ERR_OK) {
-          console.info('Test Leo - receive singer list:', response)
+          console.info('Test Leo - receive singerlist:', response)
           this.groupList = this.normalizeSingerList(response.data.list)
         }
       } catch (err) {
@@ -99,8 +114,7 @@ export default {
     }
   },
   created() {
-    console.info('Test Leo - trigger created method in Singers page')
-    this.fetchSingers()
+    this.fetchSingerList()
   }
 }
 </script>
@@ -110,8 +124,6 @@ export default {
 
 #singers {
   @include fixed-top;
-  overflow: hidden;
-
   .loading-container {
     position: absolute;
     top: 50%;

@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll" ref="wrapper">
+  <div class="scroll-wrapper" ref="wrapper">
     <slot></slot>
   </div>
 </template>
@@ -16,18 +16,7 @@ export default {
     },
     click: {
       type: Boolean,
-      default: true
-    },
-    scrollData: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    }
-  },
-  data() {
-    return {
-      scroll: null
+      default: false
     }
   },
   methods: {
@@ -48,8 +37,6 @@ export default {
       this.scroll && this.scroll.disable()
     },
     refresh() {
-      console.info('Test Leo - ready to refresh scroll')
-      console.info('------')
       this.scroll && this.scroll.refresh()
     },
     // Scroll the contents to the specified dom element
@@ -59,23 +46,17 @@ export default {
       this.scroll && this.scroll.scrollToElement(...arguments)
     }
   },
-  watch: {
-    scrollData(newValue) {
-      if (newValue.length > 0) {
-        console.info('Test Leo - receive scroll data:', newValue)
-        setTimeout(() => this.refresh(), 500)
-      }
-    }
-  },
   mounted() {
-    this.initScroll()
+    console.info('Test Leo - ready to init scroll')
+    this.$forceNextTick(() => this.initScroll())
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.scroll {
+.scroll-wrapper {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 </style>

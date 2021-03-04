@@ -8,7 +8,7 @@
       </div>
       <!-- Singer Name -->
       <h1 class="singer-name text-center">{{ name }}</h1>
-      <!-- Singer Image -->
+      <!-- Singer Background Image -->
       <div class="singer-background-image absolute" ref="bgImage">
         <img :src="bgImage" class="absolute" />
         <div class="overlay absolute"></div>
@@ -62,6 +62,9 @@ export default {
 @import '@a/styles/scss/variables';
 
 #music-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
   .top {
     .back {
       top: 0;

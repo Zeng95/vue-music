@@ -4,7 +4,7 @@
       <li
         class="song flex flex-col justify-center"
         v-for="song in songList"
-        :key="song.id"
+        :key="song.songId"
       >
         <h2 class="name truncate">{{ song.songName }}</h2>
         <p class="description truncate">{{ getDescription(song) }}</p>
@@ -39,7 +39,6 @@ export default {
 @import '@a/styles/scss/variables';
 
 .song-list {
-  overflow: hidden;
   background: $color-background-current;
   > ul {
     padding: 20px 0;

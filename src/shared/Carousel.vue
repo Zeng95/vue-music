@@ -15,7 +15,7 @@
     <ol class="indicators flex justify-center absolute w-full">
       <li
         v-for="(item, index) in indicators"
-        :key="item"
+        :key="item.id"
         class="indicator"
         :class="{ active: currentIndex === index }"
       />
@@ -25,6 +25,7 @@
 
 <script>
 import { addClass } from '@a/scripts/dom'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   name: 'Carousel',
@@ -130,7 +131,11 @@ export default {
       this.carouselList.style.width = `${width}px`
     },
     initIndicators() {
-      this.indicators = new Array(this.carouselItems.length)
+      this.carouselItems.forEach(() => {
+        this.indicators.push({
+          id: uuidv4()
+        })
+      })
     }
   },
   mounted() {

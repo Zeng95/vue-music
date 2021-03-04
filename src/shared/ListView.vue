@@ -1,5 +1,5 @@
 <template>
-  <Scroll class="list-view" :scrollData="groupList" ref="scroll">
+  <Scroll class="list-view" ref="scroll">
     <!-- List 歌手列表 -->
     <ol class="list-group">
       <li
@@ -19,11 +19,7 @@
             @click="onClickSinger(singer)"
           >
             <div class="avatar">
-              <img
-                v-lazy="singer.avatar"
-                alt="singer avatar"
-                class="rounded-full h-full"
-              />
+              <img v-lazy="singer.avatar" class="rounded-full h-full" />
             </div>
             <span class="name">{{ singer.name }}</span>
           </li>
@@ -154,7 +150,6 @@ export default {
 
 .list-view {
   position: relative;
-  overflow: hidden;
   background: $color-background-current;
   .list-group-item {
     padding-bottom: 30px;

@@ -1,12 +1,10 @@
 <template>
   <div id="recommendations">
     <!-- 滚动内容 -->
-    <Scroll v-if="showScroll" :scrollData="playList" ref="scroll">
-      <div class="recommendations-content">
-        <!-- 轮播 -->
+    <Scroll v-if="showScroll" ref="scroll">
+      <div class="scroll-content">
         <Carousel>
           <li v-for="item in recommendations" :key="item.id">
-            <!-- :href="item.linkUrl" -->
             <a class="block">
               <img :src="item.picUrl" alt="banner" @load="onImageLoad" />
             </a>
@@ -23,7 +21,7 @@
             >
               <!-- 歌曲封面 -->
               <div class="icon">
-                <img v-lazy="item.imgurl" alt="icon" width="60" height="60" />
+                <img v-lazy="item.imgurl" class="h-full" />
               </div>
               <!-- 歌曲信息 -->
               <div class="info flex-1">
@@ -54,54 +52,55 @@ export default {
   components: { Scroll, Carousel, Loading },
   computed: {
     showScroll() {
-      return this.recommendations.length > 0
+      return this.recommendations.length > 0 && this.playList.length > 0
     }
   },
   data() {
     return {
-      recommendations: [],
       playList: [],
-      isImageLoaded: false
+      recommendations: [],
+      imageIsLoaded: false
     }
   },
   methods: {
-    // 轮播图列表
-    async getRecommendations() {
+    // 轮播图
+    async fetchRecommendationList() {
       try {
+        // 异步请求
         const response = await getRecommendationList()
         if (response.code === ERR_OK) {
-          console.info('Test Leo - receive carousel list:', response)
+          console.info('Test Leo - receive sliderlist:', response.data)
           this.recommendations = response.data.slider
         }
       } catch (err) {
-        console.error(`Request Error: ${err}`)
+        console.error('Request error:', err)
       }
     },
     // 歌单列表
-    async getSongList() {
+    async fetchPlayList() {
       try {
+        // 异步请求
         const { data: response } = await getPlayList()
         if (response.code === ERR_OK) {
-          console.info('Test Leo - receive play list:', response)
+          console.info('Test Leo - receive playlist:', response.data)
           this.playList = response.data.list
         }
       } catch (err) {
-        console.error(`Request Error: ${err}`)
+        console.error('Request error:', err)
       }
     },
     // Detect when the images are loaded
     onImageLoad() {
-      if (!this.isImageLoaded) {
+      if (!this.imageIsLoaded) {
         console.info('Test Leo - the recommendation list images are loaded')
-        this.isImageLoaded = true
+        this.imageIsLoaded = true
         this.$refs.scroll.refresh()
       }
     }
   },
   created() {
-    console.info('Test Leo - trigger created method in Recommendations page')
-    this.getRecommendations()
-    this.getSongList()
+    this.fetchRecommendationList()
+    this.fetchPlayList()
   }
 }
 </script>
@@ -112,7 +111,6 @@ export default {
 
 #recommendations {
   @include fixed-top;
-  overflow: hidden;
   .recommendation-list {
     .title {
       width: 100%;
@@ -125,9 +123,9 @@ export default {
     .song {
       padding: 0 20px 20px;
       .icon {
-        flex: 0 0 80px;
-        width: 80px;
-        padding-right: 20px;
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
       }
 
       .info {

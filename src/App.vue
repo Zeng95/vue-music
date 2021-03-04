@@ -16,10 +16,7 @@ import Tabs from '@c/Tabs'
 
 export default {
   name: 'App',
-  components: {
-    Header,
-    Tabs
-  }
+  components: { Header, Tabs }
 }
 </script>
 
