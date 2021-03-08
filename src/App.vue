@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <Tabs />
+    <TheHeader />
+    <TheTabs />
     <transition name="fade" mode="out-in">
       <keep-alive>
         <router-view />
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import Header from '@c/Header'
-import Tabs from '@c/Tabs'
+import TheTabs from '@l/TheTabs'
+import TheHeader from '@l/TheHeader'
 
 export default {
   name: 'App',
-  components: { Header, Tabs }
+  components: { TheTabs, TheHeader }
 }
 </script>
 

@@ -25,7 +25,7 @@ header {
     height: 32px;
     margin-right: 9px;
     background-size: 100%;
-    @include bg-image('../assets/images/logo');
+    @include bg-image('../../assets/images/logo');
   }
 
   .title {
