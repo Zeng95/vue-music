@@ -1,5 +1,5 @@
 <template>
-  <Scroll class="list-view" ref="scroll">
+  <Scroll class="list-view" ref="scroll" :click="true">
     <!-- List 歌手列表 -->
     <ol class="list-group">
       <li

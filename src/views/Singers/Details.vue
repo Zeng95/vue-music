@@ -1,6 +1,15 @@
 <template>
   <div id="singer-details" class="fixed">
-    <MusicList :name="singer.name" :bgImage="singer.avatar" :songs="songs" />
+    <MusicList
+      v-if="showMusicList"
+      :name="singer.name"
+      :bgImage="singer.avatar"
+      :songs="songs"
+    />
+    <!-- Loading -->
+    <div v-else class="loading-container">
+      <Loading />
+    </div>
   </div>
 </template>
 
@@ -9,13 +18,17 @@ import { ERR_OK } from '@api/config'
 import { mapGetters } from 'vuex'
 import { getSingerDetails } from '@api/singers'
 import { createSong } from '@a/scripts/song'
+import Loading from '@s/Loading'
 import MusicList from '@c/MusicList'
 
 export default {
   name: 'SingerDetails',
-  components: { MusicList },
+  components: { MusicList, Loading },
   computed: {
-    ...mapGetters('singers', ['singer'])
+    ...mapGetters('singers', ['singer']),
+    showMusicList() {
+      return this.songs.length > 0
+    }
   },
   data() {
     return {
@@ -71,5 +84,13 @@ export default {
   height: 100%;
   z-index: 101;
   background-color: $color-background-current;
+  .loading-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: translate3d(0, -50%, 0);
+  }
 }
 </style>

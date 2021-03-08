@@ -1,5 +1,5 @@
 <template>
-  <Scroll class="song-list" :scrollData="songList">
+  <Scroll class="song-list">
     <ul>
       <li
         class="song flex flex-col justify-center"

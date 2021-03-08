@@ -1,5 +1,5 @@
 <template>
-  <div id="music-list">
+  <div class="music-list">
     <!-- 顶部 -->
     <div class="top">
       <!-- Left Arrow -->
@@ -61,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 @import '@a/styles/scss/variables';
 
-#music-list {
+.music-list {
   position: relative;
   width: 100%;
   height: 100%;
