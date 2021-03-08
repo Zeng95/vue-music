@@ -10,6 +10,7 @@
     <div v-else class="loading-container">
       <Loading />
     </div>
+    <!-- 路由子页面 -->
     <transition name="slide">
       <router-view />
     </transition>
