@@ -1,7 +1,7 @@
 <template>
   <div id="recommendations">
     <!-- 滚动内容 -->
-    <Scroll v-if="showScroll" ref="scroll">
+    <Scroll v-if="showRecoContent" ref="scroll">
       <div class="scroll-content">
         <Carousel>
           <li v-for="item in recommendations" :key="item.id">
@@ -51,7 +51,7 @@ export default {
   name: 'Recommendations',
   components: { Scroll, Carousel, Loading },
   computed: {
-    showScroll() {
+    showRecoContent() {
       return this.recommendations.length > 0 && this.playList.length > 0
     }
   },
