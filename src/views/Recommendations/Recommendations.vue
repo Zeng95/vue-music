@@ -43,8 +43,8 @@
 <script>
 import { ERR_OK } from '@api/config'
 import { getRecommendationList, getPlayList } from '@api/recommendations'
-import Loading from '@s/Loading'
 import Scroll from '@s/Scroll'
+import Loading from '@s/Loading'
 import Carousel from '@s/Carousel'
 
 export default {
@@ -147,6 +147,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 0;
+    right: 0;
     width: 100%;
     transform: translate3d(0, -50%, 0);
   }

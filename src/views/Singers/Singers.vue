@@ -2,7 +2,7 @@
   <div id="singers">
     <!-- 滚动内容 -->
     <ListView
-      v-if="showScroll"
+      v-if="showGroupList"
       :group-list="groupList"
       @select="goToSingerDetails"
     />
@@ -21,8 +21,8 @@
 import { mapMutations } from 'vuex'
 import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
-import Loading from '@s/Loading'
 import Singer from '@a/scripts/singer'
+import Loading from '@s/Loading'
 import ListView from '@s/ListView'
 
 const POPULAR_NAME = '热门'
@@ -32,7 +32,7 @@ export default {
   name: 'Singers',
   components: { ListView, Loading },
   computed: {
-    showScroll() {
+    showGroupList() {
       return this.groupList.length > 0
     }
   },
@@ -129,6 +129,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 0;
+    right: 0;
     width: 100%;
     transform: translate3d(0, -50%, 0);
   }
