@@ -2,14 +2,16 @@
   <div class="music-list">
     <!-- 头部 -->
     <div class="top">
-      <!-- Icon Back -->
       <div class="back" @click="goToSingers">
         <i class="icon-back block"></i>
       </div>
-      <!-- Singer Name -->
       <h1 class="singer-name text-center">{{ name }}</h1>
-      <!-- Singer Bg Image -->
       <div class="singer-background-image" ref="bgImageWrapper">
+        <!--Play Button -->
+        <div class="play" ref="playBtn">
+          <i class="icon-play"></i>
+          <span class="text">随机播放全部</span>
+        </div>
         <img :src="bgImage" />
         <div class="mask"></div>
       </div>
@@ -68,8 +70,10 @@ export default {
         overflow = 'hidden'
 
         this.$refs.bgImageWrapper.style['padding-top'] = 0
+        this.$refs.playBtn.style.display = 'none'
       } else {
         this.$refs.bgImageWrapper.style['padding-top'] = '70%'
+        this.$refs.playBtn.style.display = 'block'
       }
 
       // 用户向下滑动
@@ -86,14 +90,12 @@ export default {
     }
   },
   methods: {
-    // 跳转到 Singers 路由页面
-    goToSingers() {
-      this.$router.push({
-        name: 'singers'
-      })
-    },
     onScroll(position) {
       this.scrollY = position.y
+    },
+    // 跳转到 Singers 路由页面
+    goToSingers() {
+      this.$router.push({ name: 'singers' })
     }
   },
   mounted() {
@@ -141,6 +143,32 @@ export default {
       height: 0;
       padding-top: 70%;
       transform-origin: top;
+      .play {
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        z-index: 50;
+        transform: translate3d(-50%, 0, 0);
+        width: 135px;
+        padding: 7px 0;
+        text-align: center;
+        border-radius: 9999px;
+        border: 1px solid $color-theme-yellow;
+        color: $color-theme-yellow;
+        .icon-play {
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 6px;
+          font-size: 16px;
+        }
+
+        .text {
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 12px;
+        }
+      }
+
       img {
         position: absolute;
         top: 0;

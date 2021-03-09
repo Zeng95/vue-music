@@ -44,7 +44,7 @@
 import { ERR_OK } from '@api/config'
 import { getRecommendationList, getPlayList } from '@api/recommendations'
 import Scroll from '@s/Scroll'
-import Loading from '@s/Loading'
+import Loading from '@s/Loading/Loading'
 import Carousel from '@s/Carousel'
 
 export default {

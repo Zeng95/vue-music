@@ -182,6 +182,7 @@ export default {
     right: 0;
     transform: translate3d(0, -50%, 0);
     width: 20px;
+    padding: 10px 0;
     border-radius: 10px;
     text-align: center;
     background: $color-background-dark;

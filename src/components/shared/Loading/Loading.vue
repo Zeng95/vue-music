@@ -1,6 +1,12 @@
 <template>
   <div id="loading" class="text-center">
-    <img :src="imgUrl" alt="loading" class="mx-auto" width="24" height="24" />
+    <img
+      :src="imgUrl"
+      alt="Loading gif"
+      class="mx-auto"
+      width="24"
+      height="24"
+    />
     <p class="description mt-1">{{ title }}</p>
   </div>
 </template>

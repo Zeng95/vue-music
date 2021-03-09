@@ -22,7 +22,7 @@ import { mapMutations } from 'vuex'
 import { getSingerList } from '@api/singers'
 import { ERR_OK } from '@api/config'
 import Singer from '@a/scripts/singer'
-import Loading from '@s/Loading'
+import Loading from '@s/Loading/Loading'
 import ListView from '@s/ListView'
 
 const POPULAR_NAME = '热门'

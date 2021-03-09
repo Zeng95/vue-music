@@ -18,7 +18,7 @@ import { ERR_OK } from '@api/config'
 import { mapGetters } from 'vuex'
 import { getSingerDetails } from '@api/singers'
 import { createSong } from '@a/scripts/song'
-import Loading from '@s/Loading'
+import Loading from '@s/Loading/Loading'
 import MusicList from '@c/MusicList'
 
 export default {
