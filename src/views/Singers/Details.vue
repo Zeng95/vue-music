@@ -1,5 +1,5 @@
 <template>
-  <div id="singer-details" class="fixed">
+  <div id="singer-details">
     <MusicList
       v-if="showMusicList"
       :name="singer.name"
@@ -76,6 +76,7 @@ export default {
 @import '@a/styles/scss/variables';
 
 #singer-details {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

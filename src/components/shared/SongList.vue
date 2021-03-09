@@ -1,9 +1,14 @@
 <template>
-  <Scroll class="song-list">
-    <ul>
+  <Scroll
+    class="song-list"
+    :probe-type="probeType"
+    :listen-scroll="listenScroll"
+    @scroll="onScroll"
+  >
+    <ul class="songs">
       <li
         class="song flex flex-col justify-center"
-        v-for="song in songList"
+        v-for="song in songs"
         :key="song.songId"
       >
         <h2 class="name truncate">{{ song.songName }}</h2>
@@ -20,7 +25,7 @@ export default {
   name: 'SongList',
   components: { Scroll },
   props: {
-    songList: {
+    songs: {
       type: Array,
       default: function() {
         return []
@@ -30,7 +35,14 @@ export default {
   methods: {
     getDescription(song) {
       return `${song.singer}·${song.albumName}`
+    },
+    onScroll(position) {
+      this.$emit('scroll', position)
     }
+  },
+  created() {
+    this.probeType = 3
+    this.listenScroll = true
   }
 }
 </script>
@@ -39,8 +51,15 @@ export default {
 @import '@a/styles/scss/variables';
 
 .song-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
   background: $color-background-current;
-  > ul {
+  overflow: unset;
+  height: auto;
+  .songs {
     padding: 20px 0;
   }
 

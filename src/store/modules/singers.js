@@ -1,7 +1,6 @@
 import { SET_SINGER } from '../mutation-types'
 
 // initial state
-// shape: [{ id, quantity }]
 const state = () => ({
   singer: {}
 })
