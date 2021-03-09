@@ -36,8 +36,8 @@ export default {
     getDescription(song) {
       return `${song.singer}·${song.albumName}`
     },
-    onScroll(position) {
-      this.$emit('scroll', position)
+    onScroll(pos) {
+      this.$emit('scroll', pos)
     }
   },
   created() {
@@ -55,10 +55,10 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 11;
   background: $color-background-current;
   overflow: unset;
   height: auto;
+  z-index: 2;
   .songs {
     padding: 20px 0;
   }
